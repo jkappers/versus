@@ -1,25 +1,7 @@
 <%= form_for(@game) do |f| %>
-  <% if @game.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+  <div class="i-beat">
+    <h1>I Beat <%= collection_select(:game, :loser_id, @opponents, :id, :email, {}, class: 'form-control') %> </h1>
 
-      <ul>
-      <% @game.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :winner_id %><br>
-    <%= f.number_field :winner_id %>
-  </div>
-  <div class="field">
-    <%= f.label :loser_id %><br>
-    <%= f.number_field :loser_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit "Make it known", class: "btn btn-success btn-lg" %>
 <% end %>

@@ -15,6 +15,7 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    @opponents = current_user.opponents
   end
 
   # GET /games/1/edit
@@ -24,7 +25,10 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
+    @game = Game.new({
+      loser:  User.find(game_params[:loser_id]),
+      winner: current_user
+    })
 
     respond_to do |format|
       if @game.save

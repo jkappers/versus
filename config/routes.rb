@@ -1,9 +1,13 @@
 Versus::Application.routes.draw do
-  resources :games
-
-  resources :groups
-
-  get "home/index"
   devise_for :users
+
+  resources :games
+  resources :groups
+  resources :users, only: :none do
+    member do
+      get "profile"
+    end
+  end
+
   root to: "home#index"
 end
