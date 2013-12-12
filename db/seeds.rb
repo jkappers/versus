@@ -11,7 +11,7 @@ admin.group = Group.create({
 admin.save!
 
 mike = User.create({
-  email:    'mmayo@kalkomey.org',
+  email:    'mmayo@kalkomey.com',
   password: 'password'
 })
 
