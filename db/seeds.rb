@@ -1,4 +1,5 @@
 admin = User.create({
+  admin:    true,
   email:    'jkappers@kalkomey.com',
   password: 'password'
 })
