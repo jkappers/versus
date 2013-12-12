@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :get_user, only: :profile
+  before_filter :get_user, only: [:profile, :show]
   load_and_authorize_resource only: :destroy
+
+  def show
+
+  end
 
   def profile
     unless @user.id == current_user.id

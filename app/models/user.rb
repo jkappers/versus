@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   belongs_to :group
   has_many :wins,  foreign_key: :winner_id, class_name: 'Game'
-  has_many :loses, foreign_key: :loser_id,  class_name: 'Game'
+  has_many :losses, foreign_key: :loser_id,  class_name: 'Game'
 
   def opponents
     group.users.where.not(id: self.id)

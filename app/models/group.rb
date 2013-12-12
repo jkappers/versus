@@ -3,16 +3,19 @@ class Group < ActiveRecord::Base
   belongs_to :creator, foreign_key: :user_id, class_name: 'User'
 
   def top_users
-    User
-      .select('email,
-        sum(case when users.id = games.winner_id then 1 else 0 end) as win,
-        sum(case when users.id = games.loser_id then 1 else 0 end) as loss'
-      )
-      .joins(:wins)
-      .where('group_id = ?', self.id)
-      .group('email')
-      .order('sum(case when users.id = games.winner_id then 1 else 0 end)')
-      .take(10)
+    User.find_by_sql(
+      <<-statement
+        select   u.id,
+                 u.email,
+                 count(*) as total_wins,
+                 (select count(*) from games where winner_id = u.id or loser_id = u.id) as total_games
+        from     users u
+                 join games g on u.id = g.winner_id
+        group by u.email
+        order by count(*) desc
+        limit 10;
+      statement
+    )
   end
 
 end

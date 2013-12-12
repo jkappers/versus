@@ -15,7 +15,7 @@ Versus::Application.routes.draw do
 
   resources :games
   resources :groups
-  resources :users, only: :none do
+  resources :users, only: :show do
     member do
       get "profile"
     end
