@@ -6,12 +6,23 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :group
 
   before_create :add_to_group
 
+  belongs_to :group
+  has_many :wins,  foreign_key: :winner_id, class_name: 'Game'
+  has_many :loses, foreign_key: :loser_id,  class_name: 'Game'
+
   def opponents
     group.users.where.not(id: self.id)
+  end
+
+  def rivals
+    User
+      .select('email, count(*) as score')
+      .joins(:wins)
+      .where('group_id = ? and loser_id = ?', self.group_id, self.id)
+      .group('email')
   end
 
   private
