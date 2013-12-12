@@ -5,7 +5,11 @@ Versus::Application.routes.draw do
     namespace :v1 do
       devise_for :users
       resources :games
-      resources :members, :only => :index
+      resources :members, :only => :index do
+        collection do
+          get 'suggest'
+        end
+      end
     end
   end
 
