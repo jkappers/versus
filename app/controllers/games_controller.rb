@@ -5,21 +5,25 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     @games = Game.all
+    authorize! :read, @games
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
+    authorize! :read, @game
   end
 
   # GET /games/new
   def new
     @game = Game.new
     @opponents = current_user.opponents
+    authorize! :create, @game
   end
 
   # GET /games/1/edit
   def edit
+    authorize! :update, @game
   end
 
   # POST /games
@@ -29,7 +33,7 @@ class GamesController < ApplicationController
       loser:  User.find(game_params[:loser_id]),
       winner: current_user
     })
-
+    authorize! :create, @game
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
@@ -44,6 +48,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
+    authorize! :update, @game
     respond_to do |format|
       if @game.update(game_params)
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
@@ -58,6 +63,7 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.json
   def destroy
+    authorize! :destroy, @game
     @game.destroy
     respond_to do |format|
       format.html { redirect_to games_url }
