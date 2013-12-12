@@ -14,7 +14,7 @@
           <tbody>
             <% current_user.group.top_users.each do |player| %>
               <tr>
-                <td><%= player.email %></td>
+                <td><%= image_tag player.gravatar_url %> <%= player.email %></td>
                 <td><%= player.win %></td>
                 <td><%= player.loss %></td>
               </tr>
@@ -40,7 +40,7 @@
           <tbody>
             <% current_user.rivals.each do |rival| %>
               <tr>
-                <td><%= rival.email %></td>
+                <td><%= image_tag rival.gravatar_url %> <%= rival.email %></td>
                 <td><%= rival.score %></td>
               </tr>
             <% end %>

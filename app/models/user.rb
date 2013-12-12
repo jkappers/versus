@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   include Tokenable
+  include Gravtastic
+
+  gravtastic
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
