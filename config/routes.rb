@@ -3,7 +3,9 @@ Versus::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      devise_for :users
       resources :games
+      resources :members, :only => :index
     end
   end
 

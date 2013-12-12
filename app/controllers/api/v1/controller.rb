@@ -5,7 +5,8 @@ module Api::V1
 		private
 
 		def authenticate_token!
-			if token = params[:auth_token].presence
+			token = params[:token] || request.headers['token']
+			if token
 				user = User.where(token: token).first
 				sign_in(user, store: false) if user
 			else
