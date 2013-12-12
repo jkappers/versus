@@ -1,2 +1,54 @@
-<h1>Users#profile</h1>
-<p>Find me in app/views/users/profile.html.erb</p>
+<div class="row">
+  <div class="col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Top Players</div>
+      <% if current_user.group.top_users.any? %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Wins</th>
+              <th>Losses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% current_user.group.top_users.each do |player| %>
+              <tr>
+                <td><%= player.email %></td>
+                <td><%= player.win %></td>
+                <td><%= player.loss %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>You are currently undefeated!</p>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Top Rivals</div>
+      <% if current_user.rivals.any? %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Wins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% current_user.rivals.each do |rival| %>
+              <tr>
+                <td><%= rival.email %></td>
+                <td><%= rival.score %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>You are currently undefeated!</p>
+      <% end %>
+    </div>
+  </div>
+</div>
