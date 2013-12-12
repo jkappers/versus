@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Tokenable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,7 +8,7 @@ class User < ActiveRecord::Base
 
   belongs_to :group
 
-  before_save :add_to_group
+  before_create :add_to_group
 
   def opponents
     group.users.where.not(id: self.id)
