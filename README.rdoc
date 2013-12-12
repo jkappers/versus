@@ -1,0 +1,5 @@
+User	 - 
+Group	 - id, name, token, user_id
+GroupsUsers - 
+Games  - winner_id, loser_id, created_at
+
