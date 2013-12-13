@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'devise', '~> 3.2.2'
 gem 'cancan', '~> 1.6.10'
 gem 'gravtastic'
+gem 'urbanairship'
 
 group :doc do
   gem 'sdoc', require: false

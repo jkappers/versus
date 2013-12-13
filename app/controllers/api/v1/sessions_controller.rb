@@ -13,6 +13,8 @@ class Api::V1::SessionsController < ApplicationController
  
     if resource.valid_password?(params[:password])
       sign_in("user", resource)
+      resource.device_token = params[:device_token]
+      resource.save
       render :json=> {:success=>true, :auth_token=>resource.token, :email=>resource.email}
       return
     end

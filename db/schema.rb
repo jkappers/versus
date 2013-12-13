@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212041313) do
+ActiveRecord::Schema.define(version: 20131213044013) do
 
   create_table "games", force: true do |t|
     t.integer  "winner_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20131212041313) do
     t.integer  "group_id"
     t.string   "token"
     t.boolean  "admin",                  default: false
+    t.string   "device_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

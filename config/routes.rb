@@ -9,7 +9,12 @@ Versus::Application.routes.draw do
         collection do
           get 'suggest'
         end
+        member do
+          post 'play'
+        end
       end
+
+      post 'users/register_device_token' => 'users#register_device_token'
     end
   end
 
