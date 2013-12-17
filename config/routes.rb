@@ -4,7 +4,7 @@ Versus::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       devise_for :users
-      resources :games
+      resources :games, :only => [:index, :create]
       resources :members, :only => :index do
         collection do
           get 'suggest'
